@@ -44,7 +44,8 @@ class CetaceanClassifierModelForImageClassification(PreTrainedModel):
 
     def __init__(self, config):
         super().__init__(config)
-        self.model = SphereClassifier.load_from_checkpoint("cetacean_classifier/last.ckpt")
+
+        self.model = SphereClassifier(cfg=config.to_dict())
         self.model.eval()
 
     def preprocess_image(self, img: Image) -> torch.Tensor:

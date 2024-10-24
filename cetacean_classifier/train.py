@@ -14,12 +14,16 @@ from .utils import WarmupCosineLambda, map_dict, topk_average_precision
 class SphereClassifier(LightningModule):
     def __init__(self, cfg: dict, id_class_nums=None, species_class_nums=None):
         super().__init__()
+        # import pdb; pdb.set_trace()
         if not isinstance(cfg, Config):
             cfg = Config(cfg)
         self.save_hyperparameters(cfg, ignore=["id_class_nums", "species_class_nums"])
         self.test_results_fp = None
 
-        print(cfg.model_name)
+        # import json
+        # cfg_json = json.dumps(cfg)
+        # with open("config_extracted.json", "w") as file:
+        #     file.write(cfg_json)
 
         # NN architecture
         self.backbone = timm.create_model(
